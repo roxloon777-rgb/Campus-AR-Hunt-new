@@ -40,7 +40,7 @@
     }
 
     function updateMap() {
-      const locations = ["Library", "SportsField", "Admin"];
+      const locations = ["Law building", "Tree", "Lovers lane"];
       locations.forEach(loc => {
         if (localStorage.getItem(loc) === "true") {
           document.getElementById(loc.toLowerCase() + "-spot").classList.add("complete");
