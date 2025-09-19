@@ -1,53 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>Lovers lane AR Hunt</title>
-  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-  <style>
-    body { margin:0; overflow:hidden; }
-    #checkin { display:none; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
-               padding: 10px 20px; font-size: 18px; background: #0078d7; color: white; border-radius: 8px; border: none; cursor: pointer; z-index: 10; }
-    #hint { position: absolute; top: 12px; left: 12px; color: white; z-index: 10; font-weight:600; }
-  </style>
-</head>
-<body>
-  <div id="hint">Point camera at the Lovers lane marker</div>
-  <button id="checkin">Check-in</button>
+  <head>
+    <title>Lovers Lane AR</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+  </head>
+  <body style="margin:0; overflow:hidden;">
+    <a-scene embedded arjs="trackingMethod: best; sourceType: webcam;">
+      <!-- Marker -->
+      <a-marker type="pattern" url="assets/syringe-outline.patt">
+        <a-entity
+          gltf-model="assets/models/medical_syringe.glb"
+          scale="0.5 0.5 0.5"
+          position="0 0 0">
+        </a-entity>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
 
-  <a-scene embedded arjs='sourceType: webcam;'>
-    <a-marker type="pattern" url="markers/Loverslane.patt" id="marker-Loverslane"
-              data-marker-name="Loverslane"
-              data-checkin-url="https://padlet.com/roxloon777/campus-hunt-wall-of-fame-gkek97r08b9p9047">
-      <a-sphere position="0 0.4 0"></a-sphere>
-      <a-text value="Lovers lane" position="0 1 0" align="center"></a-text>
-    </a-marker>
-    <a-entity camera></a-entity>
-  </a-scene>
+    <script>
+      localStorage.setItem("LoverslaneChecked", "true");
 
-  <script>
-    const btn = document.getElementById('checkin');
-    const marker = document.getElementById('marker-Loverslane');
-    let url = marker.getAttribute('data-checkin-url');
-    let locName = "Loverslane";
+      const btn = document.createElement("button");
+      btn.innerText = "Take Photo & Upload";
+      btn.style.position = "absolute";
+      btn.style.bottom = "20px";
+      btn.style.left = "50%";
+      btn.style.transform = "translateX(-50%)";
+      btn.style.padding = "10px 20px";
+      btn.style.fontSize = "16px";
+      btn.style.zIndex = "999";
+      document.body.appendChild(btn);
 
-    marker.addEventListener('markerFound', () => {
-      btn.style.display = 'block';
-      btn.textContent = "Check-in: " + locName;
-    });
-    marker.addEventListener('markerLost', () => {
-      btn.style.display = 'none';
-    });
-
-    btn.addEventListener('click', () => {
-      localStorage.setItem(locName, "true");
-      window.open(url, '_blank');
-    });
-  </script>
-</body>
-</html>
-
+      btn.onclick = () => {
+        const scene = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");
+        const dataUrl = scene.toDataURL("image/png");
+        window.open("https://padlet.com/roxloon777/campus-hunt-wall-of-fame-gkek97r08b9p9047", "_blank");
+      };
+    </script>
   </body>
 </html>
