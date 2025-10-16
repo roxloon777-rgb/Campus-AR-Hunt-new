@@ -78,11 +78,16 @@
     2️⃣ Then press “Open Padlet Wall” to upload your screenshot.
   </div>
 
-  <script>
-    // Open Padlet button
-    document.getElementById("openPadlet").addEventListener("click", () => {
-      window.open("https://padlet.com/nwu/desmond-tutu-school-of-medicine-kcvop1gmdyzyntoq", "_blank");
-    });
-  </script>
+   <script>
+  // Back to map
+  document.getElementById("backButton").addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+
+  // Open Padlet
+  document.getElementById("openPadlet").addEventListener("click", () => {
+    window.open("https://padlet.com/nwu/desmond-tutu-school-of-medicine-kcvop1gmdyzyntoq", "_blank");
+  });
+</script>
 </body>
 </html>
