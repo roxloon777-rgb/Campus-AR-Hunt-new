@@ -8,12 +8,6 @@ al<!DOCTYPE html>
   <script src="https://cdn.rawgit.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
   <style>
     body { margin: 0; overflow: hidden; }
-    #controls {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      z-index: 999;
-    }
     #controls button {
       padding: 10px;
       font-size: 16px;
@@ -31,10 +25,40 @@ al<!DOCTYPE html>
       z-index: 999;
       max-width: 90%;
     }
+     #topButtons {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: 10px;
+    z-index: 9999;
+  }
+
+  #backButton,
+  #openPadlet {
+    background-color: #6c63ff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: background-color 0.2s;
+  }
+
+  #backButton:hover,
+  #openPadlet:hover {
+    background-color: #5753d9;
+  }
   </style>
 </head>
 
 <body>
+  <div id="topButtons">
+    <button id="backButton">⬅ Back to Map</button>
+    <button id="openPadlet">📋 Padlet</button>
+  </div>
   <a-scene
     embedded
     vr-mode-ui="enabled: false"
@@ -49,20 +73,21 @@ al<!DOCTYPE html>
     <a-entity camera></a-entity>
   </a-scene>
 
-  <div id="controls">
-    <button id="openPadlet">Open Padlet Wall</button>
-  </div>
-
   <div id="instructions">
     1️⃣ Use your phone’s **native screenshot** (power + volume buttons) to capture your AR experience.<br>
     2️⃣ Then press “Open Padlet Wall” to upload your screenshot.
   </div>
 
-  <script>
-    // Open Padlet button
-    document.getElementById("openPadlet").addEventListener("click", () => {
-      window.open("https://padlet.com/nwu/desmond-tutu-school-of-medicine-kcvop1gmdyzyntoq", "_blank");
-    });
-  </script>
+   <script>
+  // Back to map
+  document.getElementById("backButton").addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+
+  // Open Padlet
+  document.getElementById("openPadlet").addEventListener("click", () => {
+    window.open("https://padlet.com/nwu/desmond-tutu-school-of-medicine-kcvop1gmdyzyntoq", "_blank");
+  });
+</script>
 </body>
 </html>
