@@ -63,11 +63,11 @@ al<!DOCTYPE html>
     embedded
     vr-mode-ui="enabled: false"
     id="ar-scene"
-    arjs="sourceType: webcam; facingMode: user;"> <!-- front camera -->
+    arjs="sourceType: webcam; facingMode: user;"> <!-- front camera --> 
 
     <!-- Hiro marker -->
     <a-marker type="pattern" url="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/data/patt.hiro">
-      <a-entity gltf-model="models/medical_mask.glb" scale="0.5 0.5 0.5" position="0 0 0"></a-entity>
+      <a-entity gltf-model="models/meet_mira.glb" scale="2 2 2" position="0 0 0"></a-entity>
                <!-- 🗨️ Speech bubble on the floor in front -->
   <a-entity
     geometry="primitive: plane; height: 1.2; width: 2.5"
@@ -78,9 +78,9 @@ al<!DOCTYPE html>
           align: center; color: white; width: 2.2; wrapCount: 30;">
   </a-entity>
       
-       <!-- 💉 Prize: Syringe model -->
+       <!-- 💉 Prize: Medical Mask -->
         <a-entity
-          gltf-model="models/medical_syringe.glb"
+          gltf-model="models/medical_mask.glb"
           scale="1 1 1"
           position="0.3 0.5 0.5"
           rotation="0 45 0">
