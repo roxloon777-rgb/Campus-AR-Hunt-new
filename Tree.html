@@ -50,6 +50,25 @@
   #openPadlet:hover {
     background-color: #5753d9;
   }
+     /* Hover Info Block */
+      #infoBox {
+        position: fixed;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #6D3E92;
+        color: white;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        padding: 15px 20px;
+        border-radius: 12px;
+        width: 85%;
+        max-width: 500px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        z-index: 9999;
+      }
   </style>
 </head>
 
@@ -59,6 +78,11 @@
     <button id="openPadlet">📋 Open Padlet</button>
   </div>
   
+  <!-- Info box -->
+    <div id="infoBox">
+      🌳 <strong>Well done!</strong> You found the Acacia Tree! A sculpture of this tree can be found on all three campuses and symbolises regeneration, perseverance, and integrity.
+    </div>
+  <!-- AR Scene -->
   <a-scene
     embedded
     vr-mode-ui="enabled: false"
