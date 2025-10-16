@@ -1,70 +1,154 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Campus AR Hunt</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-      }
-      .map-container {
-        position: relative;
-        display: inline-block;
-      }
-      .map-container img {
-        width: 90%;
-        max-width: 800px;
-      }
-      .hotspot {
-        position: absolute;
-        width: 30px;
-        height: 30px;
-        background: red;
-        border-radius: 50%;
-        cursor: pointer;
-        text-align: center;
-        line-height: 30px;
-        color: white;
-        font-weight: bold;
-      }
-      .hotspot.checked {
-        background: green;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Campus AR Hunt</h1>
-    <p>Tap a hotspot on the map to start your AR challenge!</p>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Campus AR Hunt</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+      background: #f0f0f0;
+      overflow: hidden;
+      text-align: center;
+    }
 
-    <div class="map-container">
-      <img src="assets/Map.png" alt="Campus Map">
+    /* Start overlay */
+    #startScreen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #000000cc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 1000;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
-      <!-- Hotspots -->
-      <div id="lawHotspot" class="hotspot" style="top:40%; left:20%;">L</div>
-      <div id="laneHotspot" class="hotspot" style="top:60%; left:50%;">LV</div>
-      <div id="treeHotspot" class="hotspot" style="top:70%; left:80%;">T</div>
-    </div>
+    #startScreen h1 {
+      color: white;
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
 
-    <script>
-      // Restore checkmarks
-      function restoreCheckmarks() {
-        if (localStorage.getItem("LawbuildingChecked")) {
-          document.getElementById("lawHotspot").classList.add("checked");
-        }
-        if (localStorage.getItem("LoverslaneChecked")) {
-          document.getElementById("laneHotspot").classList.add("checked");
-        }
-        if (localStorage.getItem("TreeChecked")) {
-          document.getElementById("treeHotspot").classList.add("checked");
-        }
-      }
+    #startScreen button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
 
-      // Navigation
-      document.getElementById("lawHotspot").onclick = () => window.location.href = "Lawbuilding.html";
-      document.getElementById("laneHotspot").onclick = () => window.location.href = "Loverslane.html";
-      document.getElementById("treeHotspot").onclick = () => window.location.href = "Tree.html";
+    #startScreen button:hover {
+      background: #0056b3;
+    }
 
-      restoreCheckmarks();
-    </script>
-  </body>
+    /* Map & hotspots */
+    #mapContainer {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #mapImage {
+      width: auto;
+      height: 100%;
+      max-width: 100%;
+      display: block;
+    }
+
+    .hotspot {
+      position: absolute;
+      background: rgba(109, 62, 146, 0.8);
+      color: white;
+      padding: 6px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    .collected {
+      background: rgba(0, 200, 0, 0.8);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Start overlay -->
+<div id="startScreen">
+  <h1>
+    Padlet Scavenger Hunt: Through Our Campus Lens<br><br>
+    Welcome to our creative photo challenge! For best results turn your screen to landscape! 📸✨<br>
+    Your mission: explore, capture, and share the spirit of our campus through three special locations.<br>
+    Find each place, take a photo, and post it on Padlet!
+  </h1>
+  <button id="startButton">Start</button>
+</div>
+
+<div id="mapContainer">
+  <img id="mapImage" src="assets/Map2.png" alt="Map">
+
+  <div class="hotspot" id="law">Calvyn Fountain</div>
+  <div class="hotspot" id="lovers">Lover's Lane</div>
+  <div class="hotspot" id="tree">Acacia Tree</div>
+</div>
+
+<script>
+const collected = JSON.parse(localStorage.getItem('collected') || '{}');
+
+function positionHotspots() {
+  const map = document.getElementById('mapImage');
+  const rect = map.getBoundingClientRect();
+
+  // Pixel positions on the map
+  const positions = {
+    law: { x: 1384, y: 708 },
+    lovers: { x: 1888, y: 858 },
+    tree: { x: 1202, y: 1545 }
+  };
+
+  Object.keys(positions).forEach(id => {
+    const el = document.getElementById(id);
+    const x = rect.left + positions[id].x * (rect.width / 3508);
+    const y = rect.top + positions[id].y * (rect.height / 2481);
+    el.style.left = `${x}px`;
+    el.style.top = `${y}px`;
+    if (collected[id]) el.classList.add('collected');
+
+    el.onclick = () => {
+      collected[id] = true;
+      localStorage.setItem('collected', JSON.stringify(collected));
+      el.classList.add('collected');
+      // Navigate to marker-based AR page
+      window.location.href = `ar_${id}.html`;
+    };
+  });
+}
+
+window.addEventListener('resize', positionHotspots);
+document.getElementById('mapImage').onload = positionHotspots;
+positionHotspots();
+
+document.getElementById('startButton').addEventListener('click', () => {
+  document.getElementById('startScreen').style.display = 'none';
+});
+</script>
+
+</body>
 </html>
