@@ -81,17 +81,7 @@
             material="opacity: 0.95; side: double;"
             position="0 0 0">
           </a-plane>
-
-          <!-- Speech bubble tail -->
-          <a-circle
-            color="#6D3E92"
-            vertex-a="0 -0.6 0"
-            vertex-b="-0.2 -1.0 0"
-            vertex-c="0.2 -1.0 0"
-            position="0 -0.1 0"
-            rotation="0 0 0">
-          </a-circle>
-
+          
           <!-- Text -->
           <a-text
             value="🌳 Well done!\nYou found the Acacia Tree!\nA sculpture of this tree can be found on all three campuses and symbolises regeneration, perseverance, and integrity."
@@ -101,8 +91,24 @@
             position="0 0 0.01"
             wrap-count="40">
           </a-text>
-
         </a-entity>
+      
+       <!-- 💉 Prize: Syringe model -->
+        <a-entity
+          gltf-model="url(syringe.glb)"
+          scale="0.3 0.3 0.3"
+          position="0.3 0.5 0.5"
+          rotation="0 45 0">
+        </a-entity>
+
+        <!-- Text label for the prize -->
+        <a-text
+          value="Your prize is your very own medical syringe!"
+          color="white"
+          align="center"
+          position="0 1.3 0.5"
+          width="3">
+        </a-text>
     </a-marker>
 
     <a-entity camera></a-entity>
