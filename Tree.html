@@ -68,27 +68,24 @@
 
     <!-- Hiro marker -->
     <a-marker type="pattern" url="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/data/patt.hiro">
-      <a-entity gltf-model="models/meet_mira.glb" scale="1 1 1" position="0 0 0"></a-entity>
+      <a-entity gltf-model="models/meet_mira.glb" scale="1.5 1.5 1.5" position="0 0 0"></a-entity>
       
-         <!-- 🗨️ Speech bubble on the floor in front -->
+        <!-- 🗨️ Speech bubble on the floor in front -->
   <a-entity
-    geometry="primitive: plane; height: 0.5; width: 1.2"
+    geometry="primitive: plane; height: 1.2; width: 2.5"
     material="color: #6D3E92; opacity: 0.9"
-    position="0 0 1.2"
+    position="0 0.01 1.2"
     rotation="-60 0 0"
-    scale="0.3 0.3 0.3"
-    look-at="[camera]"
     text="value: Well done! You found the Acacia Tree!\nA sculpture of this tree can be found on all three campuses and symbolises regeneration, perseverance, and integrity.; 
           align: center; color: white; width: 2.2; wrapCount: 30;">
   </a-entity>
-      
+
        <!-- 💉 Prize: Syringe model -->
         <a-entity
           gltf-model="models/medical_syringe.glb"
-          scale="1 1 1"
-          position="0.3 0.1 1.2"
-          rotation="0 45 0"
-          animation="property: rotation; to: 0 405 0; loop: true; dur: 5000; easing: linear">
+          scale="1.5 1.5 1.5"
+          position="0.3 0.5 0.5"
+          rotation="0 45 0">
         </a-entity>
 
         <!-- Text label for the prize -->
