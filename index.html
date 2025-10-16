@@ -116,7 +116,7 @@ function positionHotspots() {
   const map = document.getElementById('mapImage');
   const rect = map.getBoundingClientRect();
 
-  // Pixel positions on the map
+  // Pixel positions on the map (from GPS version)
   const positions = {
     law: { x: 1384, y: 708 },
     lovers: { x: 1888, y: 858 },
@@ -131,12 +131,15 @@ function positionHotspots() {
     el.style.top = `${y}px`;
     if (collected[id]) el.classList.add('collected');
 
+    // Navigate to the correct AR page
     el.onclick = () => {
       collected[id] = true;
       localStorage.setItem('collected', JSON.stringify(collected));
       el.classList.add('collected');
-      // Navigate to marker-based AR page
-      window.location.href = `ar_${id}.html`;
+
+      if (id === 'law') window.location.href = 'law.html';
+      if (id === 'lovers') window.location.href = 'lovers.html';
+      if (id === 'tree') window.location.href = 'tree.html';
     };
   });
 }
@@ -152,3 +155,4 @@ document.getElementById('startButton').addEventListener('click', () => {
 
 </body>
 </html>
+
