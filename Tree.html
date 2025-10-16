@@ -69,17 +69,30 @@
     <!-- Hiro marker -->
     <a-marker type="pattern" url="https://raw.githubusercontent.com/AR-js-org/AR.js/master/data/data/patt.hiro">
       <a-entity gltf-model="models/meet_mira.glb" scale="2 2 2" position="0 0 0"></a-entity>
- <!-- Floating Info Panel -->
-        <a-entity position="1 0.4 0">
+      
+         <!-- Speech Bubble (main panel + tail) -->
+        <a-entity id="speechBubble" position="0.9 0.4 0" rotation="0 -15 0">
+
+          <!-- Bubble background -->
           <a-plane
             color="#6D3E92"
             width="1.8"
             height="1.2"
             material="opacity: 0.95; side: double;"
-            position="0 0 0"
-            rotation="0 0 0">
+            position="0 0 0">
           </a-plane>
 
+          <!-- Speech bubble tail -->
+          <a-triangle
+            color="#6D3E92"
+            vertex-a="0 -0.6 0"
+            vertex-b="-0.2 -1.0 0"
+            vertex-c="0.2 -1.0 0"
+            position="0 -0.1 0"
+            rotation="0 0 0">
+          </a-triangle>
+
+          <!-- Text -->
           <a-text
             value="🌳 Well done!\nYou found the Acacia Tree!\nA sculpture of this tree can be found on all three campuses and symbolises regeneration, perseverance, and integrity."
             align="center"
@@ -88,8 +101,8 @@
             position="0 0 0.01"
             wrap-count="40">
           </a-text>
+
         </a-entity>
-      
     </a-marker>
 
     <a-entity camera></a-entity>
